@@ -29,10 +29,10 @@ app.get('/movies', async (req, res) => {
 		}
 	);
 
-	// if (!response.ok) {
-	//     res.status(500).send();
-	//     return;
-	// }
+	if (!response.ok) {
+	    res.status(500).send('Something went wrong with The Movie Database. Please try again later.');
+	    return;
+	}
 
 	const movies: any = await response.json();
 
