@@ -30,87 +30,74 @@
 		</nav>
 
 		<div class="py-10">
-			<header>
-				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<header class="mb-12">
+				<form @submit="searchMovies" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<h1
 						class="text-3xl font-bold leading-tight tracking-tight text-gray-900"
 					>
 						Search
 					</h1>
-					<div className="mx-auto max-w-2xl">
-						<!-- <label
-							for="email"
-							class="block text-sm font-medium leading-6 text-gray-900"
-							>Email</label
-						> -->
-						<div class="mt-2 flex rounded-md shadow-sm">
+					<div class="mt-2 max-w-2xl mx-auto flex rounded-md shadow-sm">
+						<div
+							class="relative flex flex-grow items-stretch focus-within:z-10"
+						>
 							<div
-								class="relative flex flex-grow items-stretch focus-within:z-10"
+								class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
 							>
-								<div
-									class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-								>
-									<MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-								</div>
-								<input
-									name="search"
-									id="search"
-									class="block w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								<MagnifyingGlassIcon
+									class="h-5 w-5 text-gray-400"
+									aria-hidden="true"
 								/>
 							</div>
-							<button
-								type="button"
-								class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-							>
-								Search
-							</button>
+							<input
+								name="search"
+								id="search"
+								class="block w-full rounded-none rounded-l-md border-0 py-2.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+							/>
 						</div>
+						<button
+							class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+						>
+							Search
+						</button>
 					</div>
-				</div>
+				</form>
 			</header>
-			<main>
+			<main class="px-4">
 				<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 					<!-- Your content -->
-
-					<ul role="list" class="divide-y divide-gray-100">
-						<li
-							v-for="person in people"
-							:key="person.email"
-							class="flex justify-between gap-x-6 py-5"
-						>
-							<div class="flex min-w-0 gap-x-4">
+					<ul
+						role="list"
+						class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+					>
+						<li v-for="movie in movies" :key="movie.movie_id" class="relative">
+							<div
+								class="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
+							>
 								<img
-									class="h-12 w-12 flex-none rounded-full bg-gray-50"
-									:src="person.imageUrl"
+									:src="movie.poster_image_url"
 									alt=""
+									class="pointer-events-none object-cover group-hover:opacity-75"
 								/>
-								<div class="min-w-0 flex-auto">
-									<p class="text-sm font-semibold leading-6 text-gray-900">
-										{{ person.name }}
-									</p>
-									<p class="mt-1 truncate text-xs leading-5 text-gray-500">
-										{{ person.email }}
-									</p>
-								</div>
-							</div>
-							<div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-								<p class="text-sm leading-6 text-gray-900">{{ person.role }}</p>
-								<p
-									v-if="person.lastSeen"
-									class="mt-1 text-xs leading-5 text-gray-500"
+								<button
+									type="button"
+									class="absolute inset-0 focus:outline-none"
 								>
-									Last seen
-									<time :datetime="person.lastSeenDateTime">{{
-										person.lastSeen
-									}}</time>
-								</p>
-								<div v-else class="mt-1 flex items-center gap-x-1.5">
-									<div class="flex-none rounded-full bg-emerald-500/20 p-1">
-										<div class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-									</div>
-									<p class="text-xs leading-5 text-gray-500">Online</p>
-								</div>
+									<span class="sr-only"
+										>View details for {{ movie.title }}</span
+									>
+								</button>
 							</div>
+							<p
+								class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900"
+							>
+								{{ movie.title }}
+							</p>
+							<p
+								class="pointer-events-none block text-sm font-medium text-gray-500"
+							>
+								{{ movie.popularity_summary }}
+							</p>
 						</li>
 					</ul>
 				</div>
@@ -122,66 +109,15 @@
 <script setup>
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
-const people = [
-	{
-		name: 'Leslie Alexander',
-		email: 'leslie.alexander@example.com',
-		role: 'Co-Founder / CEO',
-		imageUrl:
-			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: '3h ago',
-		lastSeenDateTime: '2023-01-23T13:23Z',
-	},
-	{
-		name: 'Michael Foster',
-		email: 'michael.foster@example.com',
-		role: 'Co-Founder / CTO',
-		imageUrl:
-			'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: '3h ago',
-		lastSeenDateTime: '2023-01-23T13:23Z',
-	},
-	{
-		name: 'Dries Vincent',
-		email: 'dries.vincent@example.com',
-		role: 'Business Relations',
-		imageUrl:
-			'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: null,
-	},
-	{
-		name: 'Lindsay Walton',
-		email: 'lindsay.walton@example.com',
-		role: 'Front-end Developer',
-		imageUrl:
-			'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: '3h ago',
-		lastSeenDateTime: '2023-01-23T13:23Z',
-	},
-	{
-		name: 'Courtney Henry',
-		email: 'courtney.henry@example.com',
-		role: 'Designer',
-		imageUrl:
-			'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: '3h ago',
-		lastSeenDateTime: '2023-01-23T13:23Z',
-	},
-	{
-		name: 'Tom Cook',
-		email: 'tom.cook@example.com',
-		role: 'Director of Product',
-		imageUrl:
-			'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-		lastSeen: null,
-	},
-];
+const movies = useState('movies', () => []);
 
-const query = useState('query', '');
+const url = 'http://localhost:4000/movies';
 
-async function searchMovies(query) {
-	const url = 'http://localhost:4000/movies';
+async function searchMovies(e) {
+	e.preventDefault();
+	const searchQuery = e.target.elements.search.value
+	const data = await $fetch(url + '?search=' + searchQuery);
 
-	const response = await fetch(url + '?query=' + query);
+	movies.value = data;
 }
 </script>

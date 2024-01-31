@@ -1,6 +1,8 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 
 const port = parseInt(process.env.PORT || '4000');
 
@@ -11,6 +13,7 @@ app.get('/', (req, res) => {
 const MOVIE_DB_ENDPOINT = 'https://api.themoviedb.org/3/search/movie';
 
 app.get('/movies', async (req, res) => {
+	console.log('endpoint hit');
 	// console.log query params
 	const { search } = req.query;
 
