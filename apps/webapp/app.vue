@@ -57,7 +57,6 @@
 			</header>
 			<main class="px-4">
 				<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-					<!-- Your content -->
 					<ul
 						role="list"
 						class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
