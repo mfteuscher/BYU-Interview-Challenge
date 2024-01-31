@@ -4,17 +4,29 @@
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div class="flex h-16 justify-between">
 					<div class="flex">
-						<div class="flex flex-shrink-0 items-center">
+						<div class="flex flex-shrink-0 gap-1 md:gap-3 items-center">
 							<img
 								class="block h-8 w-auto lg:hidden"
 								src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
-								alt="Your Company"
+								alt="TMDB logo"
 							/>
 							<img
 								class="hidden h-8 w-auto lg:block"
 								src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
-								alt="Your Company"
+								alt="TMDB logo"
 							/>
+							<span><XMarkIcon class="size-8" /></span>
+							<img
+								class="block h-8 w-auto lg:hidden"
+								src="https://cpaacademy.s3.amazonaws.com/images/companylogos/byu-logo-blue.png"
+								alt="BYU logo"
+							/>
+							<img
+								class="hidden h-8 w-auto lg:block"
+								src="https://cpaacademy.s3.amazonaws.com/images/companylogos/byu-logo-blue.png"
+								alt="BYU logo"
+							/>
+
 						</div>
 					</div>
 				</div>
@@ -99,6 +111,7 @@
 
 <script setup>
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
+import { XMarkIcon } from '@heroicons/vue/24/solid';
 
 const movies = useState('movies', () => []);
 
