@@ -6,6 +6,7 @@ This is a small application that I built for my job interview for a Software Dev
 Before cloning this repository, make sure you have the following installed on your machine:
 - Node v20 or higher
 - pnpm (for package management)
+- a `.env` file in the `apps/webservice` directory containing the `MOVIE_DB_API_KEY` variable
 
 ## Startup
 This is a monorepo using Turborepo. To get started after cloning the repo, first run `pnpm i`. Because this is a monorepo, this will install all dependencies for all applications inside of this repository.
