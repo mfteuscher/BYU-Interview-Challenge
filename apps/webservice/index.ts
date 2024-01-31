@@ -39,7 +39,7 @@ app.get('/movies', async (req, res) => {
 	const responseBody = movies.results.map((movie: any) => ({
 		movie_id: movie.id,
 		title: movie.original_title,
-		poster_image_url: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+		poster_image_url: movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : 'https://placehold.co/600x900?text=No%20Poster%20Avaliable',
 		popularity_summary: `${movie.popularity} out of ${movie.vote_count}`,
 	}));
 
